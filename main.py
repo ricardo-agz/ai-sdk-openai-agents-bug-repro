@@ -67,16 +67,17 @@ agent = Agent(
 
 
 async def main():
-    if os.getenv("OPENAI_API_KEY"):
-        # this works
-        print("using openai")
-        result = await Runner.run(agent, "What is the weather in the capital of France?")
-        print(result.final_output)
+    # if os.getenv("OPENAI_API_KEY"):
+    #     # this works
+    #     print("using openai")
+    #     result = await Runner.run(agent, "What is the weather in the capital of France?")
+    #     print(result.final_output)
 
     # this doesn't work
     print("\n\n********** using Vercel AI Gateway **********\n\n")
     api_key = os.getenv("AI_GATEWAY_API_KEY") or os.getenv("VERCEL_OIDC_TOKEN")
-    base_url = "https://ai-gateway.vercel.sh/v1"
+    base_url = "http://localhost:3004/v1"
+    # base_url = "https://ai-gateway.vercel.sh/v1"
     if not api_key:
         raise ValueError("AI_GATEWAY_API_KEY or VERCEL_OIDC_TOKEN is not set")
 
@@ -119,6 +120,15 @@ async def main():
                     },
                 }
             ],
+        },
+        {
+            "role": "tool",
+            "tool_call_id": "call_test",
+            "content": "The capital of France is France."
+        },
+        {
+            "role": "user",
+            "content": "Thanks for the help!",
         },
     ]
 

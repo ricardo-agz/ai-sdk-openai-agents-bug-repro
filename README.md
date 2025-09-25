@@ -11,9 +11,14 @@ Output from running:
 ```
 (gateway-agents-bug-repro) ricardo@Ricardos-MacBook-Pro gateway-agents-bug-repro % uv run main.py
 using openai
-The capital of France is Paris. The current weather in Paris is sunny. 
+The capital of France is Paris. The current weather in Paris is sunny.
 
-If you need more details like temperature or forecast, let me know!
+Step-by-step reasoning:
+1. First, I identified the capital of France, which is Paris.
+2. Then, I checked the weather in Paris.
+3. Result: The weather in Paris is sunny. 
+
+If you’d like to know more details like temperature or forecast, let me know!
 
 
 ********** using Vercel AI Gateway **********
@@ -103,7 +108,7 @@ JSON Body:
       "role": "assistant",
       "tool_calls": [
         {
-          "id": "call_z0KUeLafvAXcHZGoSRCwLZ81",
+          "id": "call_zLp2zCKvDP0VuQeuUumGBOBH",
           "type": "function",
           "function": {
             "name": "get_capital",
@@ -114,7 +119,7 @@ JSON Body:
     },
     {
       "role": "tool",
-      "tool_call_id": "call_z0KUeLafvAXcHZGoSRCwLZ81",
+      "tool_call_id": "call_zLp2zCKvDP0VuQeuUumGBOBH",
       "content": "The capital of France is France."
     }
   ],
@@ -176,7 +181,7 @@ ERROR: Agents run via Vercel AI Gateway raised: BadRequestError("Error code: 400
 
 === OpenAI HTTP Request (sync) ===
 POST https://ai-gateway.vercel.sh/v1/chat/completions
-Headers: {'host': 'ai-gateway.vercel.sh', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'accept': 'application/json', 'content-type': 'application/json', 'user-agent': 'OpenAI/Python 1.109.1', 'x-stainless-lang': 'python', 'x-stainless-package-version': '1.109.1', 'x-stainless-os': 'MacOS', 'x-stainless-arch': 'arm64', 'x-stainless-runtime': 'CPython', 'x-stainless-runtime-version': '3.11.13', 'x-stainless-async': 'false', 'x-stainless-retry-count': '0', 'x-stainless-read-timeout': '60.0', 'content-length': '876'}
+Headers: {'host': 'ai-gateway.vercel.sh', 'accept-encoding': 'gzip, deflate', 'connection': 'keep-alive', 'accept': 'application/json', 'content-type': 'application/json', 'user-agent': 'OpenAI/Python 1.109.1', 'x-stainless-lang': 'python', 'x-stainless-package-version': '1.109.1', 'x-stainless-os': 'MacOS', 'x-stainless-arch': 'arm64', 'x-stainless-runtime': 'CPython', 'x-stainless-runtime-version': '3.11.13', 'x-stainless-async': 'false', 'x-stainless-retry-count': '0', 'x-stainless-read-timeout': '60.0', 'content-length': '1013'}
 JSON Body:
 {
   "messages": [
@@ -200,6 +205,15 @@ JSON Body:
           }
         }
       ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_test",
+      "content": "The capital of France is France."
+    },
+    {
+      "role": "user",
+      "content": "Thanks for the help!"
     }
   ],
   "model": "gpt-4.1",
